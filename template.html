@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Changes Table</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #F7F7F7;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #333;
+            color: #fff;
+        }
+
+        th {
+            text-transform: uppercase;
+        }
+
+        tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
+
+        .added {
+            background-color: #E6F2ED;
+        }
+
+        .modified {
+            background-color: #E8F2FB;
+        }
+
+        .deleted {
+            background-color: #FFEFED;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Object Status Report</h1>
+
+    <div style="width: 100%; background-color: #f0f0f0; text-align: center; padding: 10px;">
+        White font for untouched | Green font for added | Red font for deleted | Blue font for modified
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Code</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in all_objects %}
+            <tr class="{% if obj in added_objects %}added
+                       {% elif obj in deleted_objects %}deleted
+                       {% elif obj in modified_objects %}modified{% endif %}">
+                <td>{{ obj.id }}</td>
+                <td>{{ obj.code }}</td>
+                <td>{{ obj.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>
